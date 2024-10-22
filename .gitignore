@@ -7,8 +7,6 @@
 [Ll]ogs/
 [Mm]emoryCaptures/
 
-# Asset Store tools folder
-[Aa]ssets/AssetStoreTools*
 
 # Visual Studio / MonoDevelop project files
 *.csproj
