@@ -6,8 +6,6 @@ public class SpawnManager : MonoBehaviour
 
     void Start()
     {
-        // Apply camera settings first
-        CameraManager.Instance.ApplyCameraSettings();
 
         // Find the spawn point in the current scene
         GameObject spawnPoint = GameObject.FindGameObjectWithTag("PlayerSpawn");
