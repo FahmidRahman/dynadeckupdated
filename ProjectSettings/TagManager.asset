@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - ' PlayerSpawn'
+  - PlayerCard
+  - BossCard
   layers:
   - Default
   - TransparentFX

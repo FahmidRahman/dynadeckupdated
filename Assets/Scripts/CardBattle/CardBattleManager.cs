@@ -30,6 +30,8 @@ public class CardBattleManager : MonoBehaviour
     public GameObject lastPlayedBossCard;
 
     System.Random rnd = new();
+    public GameObject cards;
+    public TextMeshProUGUI FinalText;
 
     // Start is called before the first frame update
     void Start()
@@ -119,9 +121,11 @@ public class CardBattleManager : MonoBehaviour
     // 0 game not over, 1 player won, 2 player lost
     void CheckForGameEnd() {
         if (bossHealth <= 0) {
-            // game win screen
+            cards.SetActive(false);
+            FinalText.SetText("YOU DEFEATED THE DUNGEON!");
         } else if (playerHealth <= 0) {
-            // game over screen
+            cards.SetActive(false);
+            FinalText.SetText("GAME OVER...");
         }
     }
 
@@ -136,6 +140,8 @@ public class CardBattleManager : MonoBehaviour
         // Update health text
         playerHealthText.SetText($"Player Health: {playerHealth}");
         bossHealthText.SetText($"Boss Health: {bossHealth}");
+
+        CheckForGameEnd();
     }
 
     string GetElement(int val) {
