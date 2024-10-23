@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414736, b: 0.12107852, a: 1}
+  m_IndirectSpecularColor: {r: 0.12731713, g: 0.13414738, b: 0.121078536, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -852,13 +852,23 @@ MonoBehaviour:
   m_GameObject: {fileID: 367884085}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 266daf5e61361014c85da8c9bb1c0a2f, type: 3}
+  m_Script: {fileID: 11500000, guid: f0cbe9aaadd6c0545bbabb0897ce5b99, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCardGameObjects: []
+  playerCardGameObjects:
+  - {fileID: 4736507793192438547, guid: 267792579c52de94e864b4124c935a23, type: 3}
+  - {fileID: 4736507793192438547, guid: 267792579c52de94e864b4124c935a23, type: 3}
+  - {fileID: 4736507793192438547, guid: 267792579c52de94e864b4124c935a23, type: 3}
+  - {fileID: 4736507793192438547, guid: 267792579c52de94e864b4124c935a23, type: 3}
+  - {fileID: 4736507793192438547, guid: 267792579c52de94e864b4124c935a23, type: 3}
   playerHealthText: {fileID: 280991410}
   lastPlayedPlayerCard: {fileID: 582815662680787448}
-  bossCardGameObjects: []
+  bossCardGameObjects:
+  - {fileID: 4736507793192438547, guid: ffaa660892b99ec4dbf386aa3f34fdaf, type: 3}
+  - {fileID: 4736507793192438547, guid: ffaa660892b99ec4dbf386aa3f34fdaf, type: 3}
+  - {fileID: 4736507793192438547, guid: ffaa660892b99ec4dbf386aa3f34fdaf, type: 3}
+  - {fileID: 4736507793192438547, guid: ffaa660892b99ec4dbf386aa3f34fdaf, type: 3}
+  - {fileID: 4736507793192438547, guid: ffaa660892b99ec4dbf386aa3f34fdaf, type: 3}
   bossHealthText: {fileID: 1042381709}
   lastPlayedBossCard: {fileID: 340651307}
   cards: {fileID: 1696135557}
