@@ -1,22 +1,31 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.UI;
 
-public class CardBattle : MonoBehaviour
+public class CardBattleManager : MonoBehaviour
 {
-    public int[][] playerCards; // card value then the card element
+    public int[,] playerCards = new int[5,2]; // card value then the card element
+    public GameObject[] playerCardGameObjects = new GameObject[5];
     private int playerHealth = 10;
-    public int[][] bossCards;
+    public TextMeshProUGUI playerHealthText;
+    public int[,] bossCards = new int[5,2];
+    public GameObject[] bossCardGameObjects = new GameObject[5];
     private int bossHealth = 10;
-    System.Random rnd = new System.Random();
+    public TextMeshProUGUI bossHealthText;
+    System.Random rnd;
 
     // Start is called before the first frame update
     void Start()
     {
+        rnd = new();
+        playerCardGameObjects = GameObject.FindGameObjectsWithTag("PlayerCard");
+        bossCardGameObjects = GameObject.FindGameObjectsWithTag("BossCard");
         DrawFiveCards();
-        while (CheckForGameEnd() == 0) {
-            
-        }
+        UpdateView();
         // draw phase 5 cards are generated
         // choose phase, wait for player choice
         // calculation phase, calculate health changes and change used card to new card,
@@ -28,21 +37,19 @@ public class CardBattle : MonoBehaviour
     // card element 1-ice, 2-fire, 3-water
     void DrawFiveCards() {
         for (int i = 0; i < 5; i++) {
-            playerCards[i][0] = rnd.Next(1, 10); // card value
-            playerCards[i][1] = rnd.Next(1, 3);  // card element
-            bossCards[i][0] = rnd.Next(1, 10); // card value
-            bossCards[i][1] = rnd.Next(1, 3);  // card element 
+            playerCards[i, 0] = rnd.Next(1, 10); // card value
+            playerCards[i, 1] = rnd.Next(1, 3);  // card element
+            bossCards[i, 0] = rnd.Next(1, 10); // card value
+            bossCards[i, 1] = rnd.Next(1, 3);  // card element 
         }
-
-
     }
 
     void BattlePhase(int playerCardChosen, int bossCardChosen) 
     {
-        int playerCardValue = playerCards[playerCardChosen][0];
-        int playerCardElement = playerCards[playerCardChosen][1];
-        int bossCardValue = bossCards[bossCardChosen][0];
-        int bossCardElement = bossCards[bossCardChosen][1];
+        int playerCardValue = playerCards[playerCardChosen, 0];
+        int playerCardElement = playerCards[playerCardChosen, 1];
+        int bossCardValue = bossCards[bossCardChosen, 0];
+        int bossCardElement = bossCards[bossCardChosen, 1];
         int damageDealt = 0;
         int damageTaken = 0;
 
@@ -73,10 +80,10 @@ public class CardBattle : MonoBehaviour
         bossHealth -= damageDealt;
 
         // replace the two used cards with new cards
-        playerCards[playerCardChosen][0] = rnd.Next(1, 10); // card value
-        playerCards[playerCardChosen][1] = rnd.Next(1, 3); // card element
-        bossCards[bossCardChosen][0] = rnd.Next(1, 10); // card value
-        bossCards[bossCardChosen][1] = rnd.Next(1, 3); // card element
+        playerCards[playerCardChosen,0] = rnd.Next(1, 10); // card value
+        playerCards[playerCardChosen, 1] = rnd.Next(1, 3); // card element
+        bossCards[bossCardChosen, 0] = rnd.Next(1, 10); // card value
+        bossCards[bossCardChosen, 1] = rnd.Next(1, 3); // card element
     }
 
     // 0 game not over, 1 player won, 2 player lost
@@ -88,6 +95,22 @@ public class CardBattle : MonoBehaviour
         } else {
             return 0;
         }
+    }
+
+    void UpdateView() {
+        // Update card text
+        for (int i = 0; i < 5; i++) {
+            string cardElement = "NONE";
+            if (playerCards[i, 1] == 1) cardElement = "Ice";
+            if (playerCards[i, 1] == 2) cardElement = "Fire";
+            if (playerCards[i, 1] == 3) cardElement = "Water";
+            
+            TextMeshProUGUI text = playerCardGameObjects[i].transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
+            text.SetText($"{playerCards[i, 0]} - {cardElement}");
+        }
+
+        // Update health text
+
     }
 
     // Update is called once per frame
