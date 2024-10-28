@@ -1,150 +1,132 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
 public class NPCInteraction : MonoBehaviour
 {
-    // Array or list of dialogue paragraphs
-    public string[] npcDialogueParagraphs;
-    public string postKeyDialogue = "Safe travels..."; // Dialogue after receiving the key
-    private int currentDialogueIndex = 0; // Tracks the current paragraph index
+    // Serialized fields for easy customization in Unity Inspector
+    [SerializeField] private string[] npcDialogueParagraphs;
+    [SerializeField] private float interactionDistance = 3.0f;
+    [SerializeField] private GameObject speechBubble;
+    [SerializeField] private TextMeshProUGUI bubbleText;
+    [SerializeField] private Transform player;
+    [SerializeField] private GameObject keyPanel;  // Optional: Key UI panel for rewards
 
-    public float interactionDistance = 3.0f;
-    private bool isPlayerInRange = false;
+    // Private variables
+    private int currentDialogueIndex;
+    private bool isInteracting;
+    private bool hasKey;  // Example flag for a player reward check
+    private PlayerInput playerInput;
+    private CharacterMovement characterMovement;
 
-    public Transform player;
+    // Custom events
+    public delegate void DialogueEvent();
+    public event DialogueEvent OnDialogueStart;
+    public event DialogueEvent OnDialogueEnd;
 
-    // Reference to the Speech Bubble Panel and Bubble Text (TextMeshPro)
-    public GameObject speechBubble; // The speech bubble panel
-    public TextMeshProUGUI bubbleText; // The text inside the speech bubble
-
-    // Reference to the Key Panel
-    public GameObject keyPanel; // The key panel to show after dialogue
-
-    private bool isInteracting = false;
-
-    private CharacterMovement characterMovement;  // Reference to the CharacterMovement script
-    private PlayerInput playerInput; // Reference to the PlayerInput script
-    private Inventory playerInventory; // Reference to the player's inventory
-
-    void Start()
+    private void Start()
     {
-        bubbleText.text = "";  // Initially clear the dialogue UI
-        speechBubble.SetActive(false);  // Initially hide the speech bubble
-        keyPanel.SetActive(false); // Initially hide the key panel
-
-        characterMovement = player.GetComponent<CharacterMovement>(); // Get the CharacterMovement component from the player
-        playerInput = player.GetComponent<PlayerInput>(); // Get the PlayerInput component from the player
-        playerInventory = player.GetComponent<Inventory>(); // Get the Inventory component from the player
+        InitializeDialogue();
+        InitializePlayerComponents();
     }
 
-    void Update()
+    private void Update()
+    {
+        HandleInteraction();
+    }
+
+    private void InitializeDialogue()
+    {
+        bubbleText.text = "";  // Clear any text initially
+        speechBubble.SetActive(false);  // Hide bubble initially
+        keyPanel?.SetActive(false);  // Hide key panel if it exists
+        currentDialogueIndex = 0;
+    }
+
+    private void InitializePlayerComponents()
+    {
+        characterMovement = player.GetComponent<CharacterMovement>();
+        playerInput = player.GetComponent<PlayerInput>();
+        if (characterMovement == null || playerInput == null)
+            Debug.LogError("Player movement or input component is missing.");
+    }
+
+    private void HandleInteraction()
     {
         float distanceToPlayer = Vector3.Distance(player.position, transform.position);
 
         if (distanceToPlayer <= interactionDistance)
         {
-            isPlayerInRange = true;
-
-            // Check if the player presses 'E' to interact
             if (Input.GetKeyDown(KeyCode.E))
             {
                 if (!isInteracting)
-                {
-                    StartInteraction();
-                }
+                    StartDialogue();
                 else
-                {
                     ShowNextDialogue();
-                }
             }
         }
-        else
+        else if (isInteracting)
         {
-            isPlayerInRange = false;
-            if (!isInteracting)
-            {
-                bubbleText.text = "";  // Clear the dialogue if player is out of range and not interacting
-                speechBubble.SetActive(false); // Hide the speech bubble
-            }
-        }
-
-        // Lock player movement when interacting
-        if (isInteracting)
-        {
-            characterMovement.enabled = false; // Disable character movement
-            playerInput.enabled = false; // Disable player input
-            Vector3 bubblePosition = transform.position + new Vector3(0, 2, 0); // Adjust Y to your liking
-            speechBubble.transform.position = Camera.main.WorldToScreenPoint(bubblePosition);
-        }
-        else
-        {
-            characterMovement.enabled = true; // Re-enable character movement
-            playerInput.enabled = true; // Re-enable player input
+            EndDialogue();
         }
     }
 
-    void StartInteraction()
+    private void StartDialogue()
     {
-        // Start the dialogue interaction
         isInteracting = true;
-        currentDialogueIndex = 0;  // Reset to the first paragraph
-
-        // Check if player already has the key
-        if (!playerInventory.HasItem("Key"))
-        {
-            ShowNextDialogue();
-        }
-        else
-        {
-            // If the key has been handed over, display "Safe Travels..."
-            bubbleText.text = postKeyDialogue; // Set the text to "Safe travels..."
-            speechBubble.SetActive(true); // Show the speech bubble
-            EndInteraction(); // Immediately end interaction since there's no further dialogue
-        }
+        currentDialogueIndex = 0;
+        OnDialogueStart?.Invoke();
+        TogglePlayerMovement(false);
+        ShowNextDialogue();
     }
 
-    void ShowNextDialogue()
+    private void ShowNextDialogue()
     {
-        // Display the current paragraph
         if (currentDialogueIndex < npcDialogueParagraphs.Length)
         {
             bubbleText.text = npcDialogueParagraphs[currentDialogueIndex];
-            speechBubble.SetActive(true); // Show the speech bubble
+            speechBubble.SetActive(true);
             currentDialogueIndex++;
         }
         else
         {
-            EndInteraction();  // End interaction when all paragraphs are shown
+            EndDialogue();
+            GiveReward();  // Optional: Give reward if applicable
         }
     }
 
-    void EndInteraction()
+    private void EndDialogue()
     {
-        // End the dialogue
         isInteracting = false;
-        bubbleText.text = "";  // Clear the bubble text
-        speechBubble.SetActive(false); // Hide the speech bubble
+        OnDialogueEnd?.Invoke();
+        bubbleText.text = "";  // Clear text
+        speechBubble.SetActive(false);
+        TogglePlayerMovement(true);
 
-        // Show the key panel after dialogue ends
-        if (!playerInventory.HasItem("Key"))
+        if (hasKey)
         {
-            keyPanel.SetActive(true); // Show the key panel
-            playerInventory.AddItem("Key"); // Add the key to the inventory
-            StartCoroutine(DisableKeyPanelAfterDelay(3f)); // Hide after 3 seconds
-        }
-        else
-        {
-            // If the key has been handed over, display "Safe Travels..."
-            bubbleText.text = postKeyDialogue; // Set the text to "Safe travels..."
-            speechBubble.SetActive(true); // Show the speech bubble
+            bubbleText.text = "Safe Travels...";
         }
     }
 
-    private IEnumerator DisableKeyPanelAfterDelay(float delay)
+    private void TogglePlayerMovement(bool enable)
     {
-        yield return new WaitForSeconds(delay); // Wait for the specified delay
-        keyPanel.SetActive(false); // Hide the key panel after the delay
+        if (characterMovement != null) characterMovement.enabled = enable;
+        if (playerInput != null) playerInput.enabled = enable;
+    }
+
+    private void GiveReward()
+    {
+        // Check if a reward (like a key) should be given to the player
+        if (!hasKey)
+        {
+            hasKey = true;
+            if (keyPanel != null) keyPanel.SetActive(true);  // Show key panel
+            Invoke(nameof(HideKeyPanel), 3f);  // Hide key panel after 3 seconds
+        }
+    }
+
+    private void HideKeyPanel()
+    {
+        if (keyPanel != null) keyPanel.SetActive(false);
     }
 }
