@@ -10,11 +10,6 @@ UserSettings/
 MemoryCaptures/
 Packages/com.unity.package-manager-ui/
 
-# Avoid backing up generated asset files
-Assets/**/*.cs.meta
-Assets/**/*.prefab.meta
-Assets/**/*.unity.meta
-
 # Ignore Unity cache and meta files
 *.pidb
 *.suo
