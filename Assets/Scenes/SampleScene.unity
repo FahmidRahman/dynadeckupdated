@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028292, g: 0.22571306, b: 0.30692118, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2902,7 +2902,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 470612265}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.39930937, y: 3e-45, z: -1e-45, w: 0.9168163}
+  m_LocalRotation: {x: 0.39930937, y: -1e-45, z: 1e-45, w: 0.9168163}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -6673,6 +6673,10 @@ PrefabInstance:
       propertyPath: targetCamera
       value: 
       objectReference: {fileID: 963194227}
+    - target: {fileID: 1472044000742095801, guid: 6d717f75c1ac7ec4face0172e5480310, type: 3}
+      propertyPath: groundLayer.m_Bits
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 8536309517951529985, guid: 6d717f75c1ac7ec4face0172e5480310, type: 3}
       propertyPath: m_LocalPosition.x
       value: 109.47252
@@ -11100,7 +11104,7 @@ GameObject:
   - component: {fileID: 1719581409}
   - component: {fileID: 1719581408}
   - component: {fileID: 1719581407}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Terrain
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -13315,7 +13319,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2043658058}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.3657425, y: -0.000000016014253, z: 0.0000000062931047, w: 0.9307161}
+  m_LocalRotation: {x: 0.3657425, y: 0.000000016014258, z: -0.0000000062931065, w: 0.9307161}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
