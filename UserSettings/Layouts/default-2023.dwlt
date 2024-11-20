@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1440
     height: 777
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Hierarchy
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -119,7 +119,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 100}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 21
+  controlID: 19
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -144,7 +144,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 100}
   m_MaxSize: {x: 16192, y: 16192}
   vertical: 1
-  controlID: 22
+  controlID: 20
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_MinSize: {x: 200, y: 50}
   m_MaxSize: {x: 16192, y: 8096}
   vertical: 0
-  controlID: 23
+  controlID: 21
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -390,7 +390,7 @@ MonoBehaviour:
       scrollPos: {x: 0, y: 0}
       m_SelectedIDs: 
       m_LastClickedID: 0
-      m_ExpandedIDs: 48f1ffff8cf1ffff0afbffff
+      m_ExpandedIDs: c85cfeff8c64feff906afeffba6bfeff8efc0000b4fc0000
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -929,9 +929,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 2.531343, y: -0.49036026, z: -3.309166}
+    m_Target: {x: 15.218687, y: -0.9593077, z: -3.0835361}
     speed: 2
-    m_Value: {x: 2.531343, y: -0.49036026, z: -3.309166}
+    m_Value: {x: 15.218687, y: -0.9593077, z: -3.0835361}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -977,13 +977,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.019290768, y: 0.9625482, z: -0.26111576, w: -0.07128056}
+    m_Target: {x: -0.026694752, y: 0.9724237, z: -0.183896, w: -0.14141825}
     speed: 2
-    m_Value: {x: -0.01928948, y: 0.96248394, z: -0.26109833, w: -0.0712758}
+    m_Value: {x: -0.02669292, y: 0.9723569, z: -0.18388338, w: -0.14140853}
   m_Size:
-    m_Target: 9.186758
+    m_Target: 9.949448
     speed: 2
-    m_Value: 9.179873
+    m_Value: 9.949448
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1167,14 +1167,14 @@ MonoBehaviour:
   m_LastFolders:
   - Assets/Scripts
   m_LastFoldersGridSize: 96
-  m_LastProjectPath: /Users/nahidrahman/Documents/gameDevelopment/dynadeckupdated
+  m_LastProjectPath: /Users/nahidrahman/Documents/gameDevelopment/dynadeck
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: ce670000
-    m_LastClickedID: 26574
-    m_ExpandedIDs: 000000008266000000ca9a3b
+    m_SelectedIDs: 4a430000
+    m_LastClickedID: 17226
+    m_ExpandedIDs: 00000000e642000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -1202,7 +1202,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000082660000
+    m_ExpandedIDs: 
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
