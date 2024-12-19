@@ -129,4 +129,10 @@ public class NPCInteraction : MonoBehaviour
     {
         if (keyPanel != null) keyPanel.SetActive(false);
     }
+
+    public bool HasKey()
+    {
+        return hasKey;
+    }
+
 }
