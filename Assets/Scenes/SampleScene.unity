@@ -941,6 +941,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -8700617353114198275, guid: c3b902c7779fc46809dc6b2d350db0c3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c3b902c7779fc46809dc6b2d350db0c3, type: 3}
       propertyPath: m_LocalPosition.x
       value: 95.2
@@ -1008,6 +1012,10 @@ PrefabInstance:
     - target: {fileID: -4292154010595695564, guid: c3b902c7779fc46809dc6b2d350db0c3, type: 3}
       propertyPath: m_LocalPosition.z
       value: -0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 65702495048144492, guid: c3b902c7779fc46809dc6b2d350db0c3, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: c3b902c7779fc46809dc6b2d350db0c3, type: 3}
       propertyPath: m_Name
@@ -26436,11 +26444,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 65702495048144492, guid: 268954a1497674a7c8e4b2cdcc2d3641, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 268954a1497674a7c8e4b2cdcc2d3641, type: 3}
       propertyPath: m_Name
       value: spiderWeb
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 268954a1497674a7c8e4b2cdcc2d3641, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7926839288223873370, guid: 268954a1497674a7c8e4b2cdcc2d3641, type: 3}
       propertyPath: m_DirtyAABB
