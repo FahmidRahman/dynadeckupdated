@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571363, b: 0.30692217, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4710,6 +4710,83 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6534347502814029905, guid: de072453d6abd9945b9827c2c3b809b5, type: 3}
   m_PrefabInstance: {fileID: 1079994712}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &795612485
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 245156125366638705, guid: 51d11766decae9140a012d7c173844a1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 153.34126
+      objectReference: {fileID: 0}
+    - target: {fileID: 245156125366638705, guid: 51d11766decae9140a012d7c173844a1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 245156125366638705, guid: 51d11766decae9140a012d7c173844a1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 112.74389
+      objectReference: {fileID: 0}
+    - target: {fileID: 245156125366638705, guid: 51d11766decae9140a012d7c173844a1, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 245156125366638705, guid: 51d11766decae9140a012d7c173844a1, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 245156125366638705, guid: 51d11766decae9140a012d7c173844a1, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 245156125366638705, guid: 51d11766decae9140a012d7c173844a1, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 245156125366638705, guid: 51d11766decae9140a012d7c173844a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 245156125366638705, guid: 51d11766decae9140a012d7c173844a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 245156125366638705, guid: 51d11766decae9140a012d7c173844a1, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445852558984522597, guid: 51d11766decae9140a012d7c173844a1, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 3.2771
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445852558984522597, guid: 51d11766decae9140a012d7c173844a1, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2.6796
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445852558984522597, guid: 51d11766decae9140a012d7c173844a1, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.4406
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445852558984522597, guid: 51d11766decae9140a012d7c173844a1, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4445852558984522597, guid: 51d11766decae9140a012d7c173844a1, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -1.8499
+      objectReference: {fileID: 0}
+    - target: {fileID: 8360463137775904386, guid: 51d11766decae9140a012d7c173844a1, type: 3}
+      propertyPath: m_Name
+      value: Stone Chalice Parent 001 (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 51d11766decae9140a012d7c173844a1, type: 3}
 --- !u!4 &797842860 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6534347502814029905, guid: de072453d6abd9945b9827c2c3b809b5, type: 3}
@@ -13494,3 +13571,4 @@ SceneRoots:
   - {fileID: 1723999947}
   - {fileID: 1379909721}
   - {fileID: 315676155}
+  - {fileID: 795612485}
