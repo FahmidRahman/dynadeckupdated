@@ -1,25 +1,31 @@
-using UnityEngine;
 using System.Collections;
+using UnityEngine;
 
-public class TileBehavior : MonoBehaviour
+public class CrackedTile : MonoBehaviour
 {
     public float shakeDuration = 0.5f;
     public float shakeMagnitude = 0.1f;
     public float breakDelay = 1.0f;
+    
     private bool isBreaking = false;
     private Vector3 initialPosition;
+
+    // Reference to the TileManager to register the tile
+    private TileManager tileManager;
 
     private void Start()
     {
         initialPosition = transform.position;
+        // Find the TileManager in the scene and register this tile
+        tileManager = FindObjectOfType<TileManager>();
+        tileManager.RegisterTile(gameObject);
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        
+        // Check if the player stepped on the tile
         if (other.CompareTag("Player") && !isBreaking)
         {
-            Debug.Log("Player stepped on tile!");
             StartCoroutine(BreakTile());
         }
     }
@@ -28,7 +34,7 @@ public class TileBehavior : MonoBehaviour
     {
         isBreaking = true;
 
-        // shake the tile
+        // Shake the tile before breaking
         float elapsed = 0.0f;
         while (elapsed < shakeDuration)
         {
@@ -41,10 +47,13 @@ public class TileBehavior : MonoBehaviour
             yield return null;
         }
 
+        // Return to original position
         transform.position = initialPosition;
 
+        // Wait before destroying the tile
         yield return new WaitForSeconds(breakDelay);
 
-        Destroy(gameObject);
+        // Disable the tile (it's broken)
+        gameObject.SetActive(false);
     }
 }
