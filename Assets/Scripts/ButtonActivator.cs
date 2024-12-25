@@ -12,8 +12,8 @@ public class ButtonActivator : MonoBehaviour
     private void Start()
     {
         buttonRenderer = GetComponent<Renderer>();
-        gameManager = FindObjectOfType<GameManager>();
-        ResetButton();
+        gameManager = Object.FindFirstObjectByType<GameManager>();
+        ResetButton(); // Ensure the button starts in its reset state
     }
 
     private void Update()
@@ -45,12 +45,12 @@ public class ButtonActivator : MonoBehaviour
     {
         if (gameManager != null && gameManager.IsCorrectButton(buttonOrder))
         {
-            buttonRenderer.material = activeMaterial;
-            gameManager.ActivateButton(buttonOrder);
+            buttonRenderer.material = activeMaterial; // Change to the active material
+            gameManager.ActivateButton(buttonOrder); // Notify GameManager
         }
         else
         {
-            gameManager.ResetButtons();
+            gameManager.ResetLevel(); // Reset level on incorrect button press
         }
     }
 
@@ -58,7 +58,8 @@ public class ButtonActivator : MonoBehaviour
     {
         if (buttonRenderer != null && inactiveMaterial != null)
         {
-            buttonRenderer.material = inactiveMaterial;
+            buttonRenderer.material = inactiveMaterial; // Reset material to inactive
         }
+        isPlayerInRange = false; // Ensure interaction is reset
     }
 }

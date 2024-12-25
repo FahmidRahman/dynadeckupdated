@@ -30,7 +30,7 @@ public class GameManager : MonoBehaviour
             {
                 timer = 0f;
                 isTimerRunning = false;
-                ResetLevel();
+                ResetLevel(); // If time runs out, reset the level
             }
 
             UpdateTimerText();
@@ -55,12 +55,12 @@ public class GameManager : MonoBehaviour
 
             if (currentButtonIndex == buttons.Length)
             {
-                UnlockDoor();
+                UnlockDoor(); // Unlock the door if all buttons are pressed in the correct order
             }
         }
         else
         {
-            ResetButtons();
+            ResetLevel(); // Reset the level if the wrong button is pressed
         }
     }
 
@@ -70,10 +70,25 @@ public class GameManager : MonoBehaviour
 
         if (door != null)
         {
-            Destroy(door);
+            Destroy(door); // Destroy the door to proceed
         }
 
         timerText.gameObject.SetActive(false); // Hide the timer once the door is unlocked
+    }
+
+    public void ResetLevel()
+    {
+        ResetButtons();
+
+        // Teleport the player back to the starting position
+        if (player != null && playerStartPosition != null)
+        {
+            player.position = playerStartPosition.position;
+            player.rotation = playerStartPosition.rotation;
+        }
+
+        timerText.gameObject.SetActive(false); // Hide the timer when resetting
+        ResetTimer();
     }
 
     public void ResetButtons()
@@ -82,23 +97,8 @@ public class GameManager : MonoBehaviour
 
         foreach (ButtonActivator button in buttons)
         {
-            button.ResetButton();
+            button.ResetButton(); // Reset each button to its original state
         }
-
-        ResetTimer();
-    }
-
-    private void ResetLevel()
-    {
-        ResetButtons();
-
-        if (player != null && playerStartPosition != null)
-        {
-            player.position = playerStartPosition.position;
-            player.rotation = playerStartPosition.rotation;
-        }
-
-        timerText.gameObject.SetActive(false); // Hide the timer when resetting
     }
 
     private void ResetTimer()
