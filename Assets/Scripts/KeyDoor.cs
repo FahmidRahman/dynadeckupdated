@@ -3,6 +3,7 @@ using UnityEngine;
 public class KeyDoor : MonoBehaviour
 {
     [SerializeField] private NPCInteraction npcInteraction; // Reference to NPCInteraction
+    [SerializeField] private GameObject wallToDisappear; // Assign the wall to disappear in the Inspector
     private bool isPlayerNearby = false; // Tracks if the player is near the door
 
     private void Update()
@@ -46,6 +47,14 @@ public class KeyDoor : MonoBehaviour
     private void OpenDoor()
     {
         Debug.Log("The door has been opened!");
+        
+        // Make the wall disappear
+        if (wallToDisappear != null)
+        {
+            wallToDisappear.SetActive(false);
+            Debug.Log("Wall has been removed.");
+        }
+
         Destroy(gameObject); // Remove the door
     }
 }
