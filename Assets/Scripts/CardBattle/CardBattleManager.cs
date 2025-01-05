@@ -28,6 +28,7 @@ public class CardBattleManager : MonoBehaviour
 
     public Button retryButton;
     public Button ascendButton;
+    public string nextLevelSceneName;
 
     // Start is called before the first frame update
     void Start()
@@ -200,6 +201,13 @@ public class CardBattleManager : MonoBehaviour
 
     public void AscendLevel()
     {
-        SceneManager.LoadScene("level2");
+        if (!string.IsNullOrEmpty(nextLevelSceneName))
+        {
+            SceneManager.LoadScene(nextLevelSceneName);
+        }
+        else
+        {
+            Debug.LogError("Next Level Scene Name is not set in the Inspector.");
+        }
     }
 }

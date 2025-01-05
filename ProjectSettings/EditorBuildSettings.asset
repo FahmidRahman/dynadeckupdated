@@ -8,7 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/level1.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/BossRoom.unity
     guid: e3b95b63990aeb249b16f79fc6bc3e7a
   - enabled: 1
@@ -23,5 +23,8 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/level3.unity
     guid: 9f6c2eade74744b169ae696001c9b151
+  - enabled: 1
+    path: Assets/Scenes/BossRoom2.unity
+    guid: 9caf0d72524b54586b5bcaccee3e064d
   m_configObjects: {}
   m_UseUCBPForAssetBundles: 0
