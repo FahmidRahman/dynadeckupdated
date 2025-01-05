@@ -20553,7 +20553,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afaae4403e4f04046b3845c886bde521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newSceneName: BossRoom
+  newSceneName: level2
 --- !u!1 &929483566
 GameObject:
   m_ObjectHideFlags: 0
