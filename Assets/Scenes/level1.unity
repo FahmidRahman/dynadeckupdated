@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.18028352, g: 0.22571363, b: 0.30692217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028305, g: 0.22571313, b: 0.3069213, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2461,7 +2461,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.7058824, g: 0.6745098, b: 0.57254905, a: 0.392}
+  m_Color: {r: 0.8396226, g: 0.8396226, b: 0.8396226, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -4218,7 +4218,8 @@ PrefabInstance:
       value: 1.8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 3701943779113559351, guid: fd02805ee801de64a828e8190cac7784, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 8688803186435683820, guid: fd02805ee801de64a828e8190cac7784, type: 3}
@@ -13597,7 +13598,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c84eb8635bca04244880f598db86662a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.078734
+      value: 0.273
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c84eb8635bca04244880f598db86662a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -13605,7 +13606,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c84eb8635bca04244880f598db86662a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.77077
+      value: 0.544
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: c84eb8635bca04244880f598db86662a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -20404,7 +20405,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: afaae4403e4f04046b3845c886bde521, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  newSceneName: level2
+  newSceneName: BossRoom
 --- !u!1 &929483566
 GameObject:
   m_ObjectHideFlags: 0

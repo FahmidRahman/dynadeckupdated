@@ -2,44 +2,45 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-using Unity.VisualScripting;
-using UnityEditor;
 using UnityEngine;
 using UnityEngine.UI;
-
-// draw phase 5 cards are generated
-// choose phase, wait for player choice
-// calculation phase, calculate health changes and change used card to new card,
-// if health drops to zero end game whether win or loss
-// otherwise choosing phase again
+using UnityEngine.SceneManagement;
 
 public class CardBattleManager : MonoBehaviour
 {
     // Player
-    public int[,] playerCards = new int[5,2]; // card value then the card element
+    public int[,] playerCards = new int[5, 2]; // card value, card element
     public GameObject[] playerCardGameObjects = new GameObject[5];
     private int playerHealth = 10;
     public TextMeshProUGUI playerHealthText;
     public GameObject lastPlayedPlayerCard;
 
     // Boss
-    public int[,] bossCards = new int[5,2];
+    public int[,] bossCards = new int[5, 2];
     public GameObject[] bossCardGameObjects = new GameObject[5];
     private int bossHealth = 10;
     public TextMeshProUGUI bossHealthText;
     public GameObject lastPlayedBossCard;
 
-    System.Random rnd = new();
+    private System.Random rnd = new System.Random();
     public GameObject cards;
     public TextMeshProUGUI FinalText;
+
+    public Button retryButton;
+    public Button ascendButton;
 
     // Start is called before the first frame update
     void Start()
     {
-        // assign ids to every card gameobject
+        // Initialize cards for player and boss
         playerCardGameObjects = GameObject.FindGameObjectsWithTag("PlayerCard");
         bossCardGameObjects = GameObject.FindGameObjectsWithTag("BossCard");
-        for (int i = 0; i < 5; i++) {
+
+        retryButton.gameObject.SetActive(false);
+        ascendButton.gameObject.SetActive(false);
+
+        for (int i = 0; i < 5; i++)
+        {
             playerCardGameObjects[i].GetComponent<PlayerCard>().id = i;
             bossCardGameObjects[i].GetComponent<BossCard>().id = i;
         }
@@ -48,91 +49,114 @@ public class CardBattleManager : MonoBehaviour
         UpdateView();
     }
 
-    // card value 1-10
-    // card element 1-ice, 2-fire, 3-water
-    void DrawFiveCards() {
-        for (int i = 0; i < 5; i++) {
+    // Draw 5 cards for both player and boss
+    void DrawFiveCards()
+    {
+        for (int i = 0; i < 5; i++)
+        {
             playerCards[i, 0] = rnd.Next(1, 11); // card value
             playerCards[i, 1] = rnd.Next(1, 4);  // card element
-            bossCards[i, 0] = rnd.Next(1, 11); // card value
-            bossCards[i, 1] = rnd.Next(1, 4);  // card element 
+            bossCards[i, 0] = rnd.Next(1, 11);   // card value
+            bossCards[i, 1] = rnd.Next(1, 4);    // card element
         }
     }
 
-    // This is called by the Player Card script which is attached to the player's cards, when a card is clicked
-    public void SelectCard(int id) {
-        BattlePhase(id, rnd.Next(0, 5));
+    // This is called when a player card is selected
+    public void SelectCard(int id)
+    {
+        // Select a random card for the boss and start the battle phase
+        int bossCardChosen = rnd.Next(0, 5);
+        BattlePhase(id, bossCardChosen);
     }
 
-    void BattlePhase(int playerCardChosen, int bossCardChosen) 
+    // Main Battle Phase
+    void BattlePhase(int playerCardChosen, int bossCardChosen)
     {
         int playerCardValue = playerCards[playerCardChosen, 0];
         int playerCardElement = playerCards[playerCardChosen, 1];
         int bossCardValue = bossCards[bossCardChosen, 0];
         int bossCardElement = bossCards[bossCardChosen, 1];
+
         int damageDealt = 0;
         int damageTaken = 0;
 
-        // Player element beats boss element
-        if ((playerCardElement == 1 && bossCardElement == 3) || 
-            (playerCardElement == 2 && bossCardElement == 1) || 
-            (playerCardElement == 3 && bossCardElement == 2))
+        // Player's element beats boss's element logic
+        if (IsPlayerElementStronger(playerCardElement, bossCardElement))
         {
-            // only apply damage if player card is higher value
-            if (playerCardValue > bossCardValue) { 
+            if (playerCardValue > bossCardValue)
+            {
                 damageDealt = playerCardValue - bossCardValue;
             }
         }
 
-        // Boss element beats player element
-        if ((bossCardElement == 1 && playerCardElement == 3) || 
-            (bossCardElement == 2 && playerCardElement == 1) || 
-            (bossCardElement == 3 && playerCardElement == 2))
+        // Boss's element beats player's element logic
+        if (IsBossElementStronger(bossCardElement, playerCardElement))
         {
-            // only apply damage if boss card is higher value
-            if (bossCardValue > playerCardValue) { 
+            if (bossCardValue > playerCardValue)
+            {
                 damageTaken = bossCardValue - playerCardValue;
             }
         }
 
-        // update player and boss health
+        // Update health
         playerHealth -= damageTaken;
         bossHealth -= damageDealt;
 
-        // set last played player and boss card text before resetting the card
-        lastPlayedBossCard.SetActive(true);
-        lastPlayedPlayerCard.SetActive(true);
-        lastPlayedPlayerCard.transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().SetText(
-            $"{playerCardValue} - {GetElement(playerCardElement)}"
-        );
-        lastPlayedBossCard.transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().SetText(
-            $"{bossCardValue} - {GetElement(bossCardElement)}"
-        );
-
-        // replace the two used cards with new cards
-        playerCards[playerCardChosen,0] = rnd.Next(1, 11); // card value
-        playerCards[playerCardChosen, 1] = rnd.Next(1, 4); // card element
-        bossCards[bossCardChosen, 0] = rnd.Next(1, 11); // card value
-        bossCards[bossCardChosen, 1] = rnd.Next(1, 4); // card element
-
+        // Update the UI with the latest health
         UpdateView();
+
+        // Show the last played cards
+        DisplayLastPlayedCards(playerCardValue, playerCardElement, bossCardValue, bossCardElement);
+
+        // Replace the used cards with new random cards
+        playerCards[playerCardChosen, 0] = rnd.Next(1, 11);
+        playerCards[playerCardChosen, 1] = rnd.Next(1, 4);
+        bossCards[bossCardChosen, 0] = rnd.Next(1, 11);
+        bossCards[bossCardChosen, 1] = rnd.Next(1, 4);
+
+        // Check if the game has ended
+        CheckForGameEnd();
     }
 
-    // 0 game not over, 1 player won, 2 player lost
-    void CheckForGameEnd() {
-        if (bossHealth <= 0) {
+    // Helper function to determine if the player's element beats the boss's element
+    bool IsPlayerElementStronger(int playerElement, int bossElement)
+    {
+        return (playerElement == 1 && bossElement == 3) ||  // Ice beats Water
+               (playerElement == 2 && bossElement == 1) ||  // Fire beats Ice
+               (playerElement == 3 && bossElement == 2);    // Water beats Fire
+    }
+
+    // Helper function to determine if the boss's element beats the player's element
+    bool IsBossElementStronger(int bossElement, int playerElement)
+    {
+        return (bossElement == 1 && playerElement == 3) ||  // Ice beats Water
+               (bossElement == 2 && playerElement == 1) ||  // Fire beats Ice
+               (bossElement == 3 && playerElement == 2);    // Water beats Fire
+    }
+
+    // Check if the game is over (either player or boss health reaches 0)
+    void CheckForGameEnd()
+    {
+        if (bossHealth <= 0)
+        {
             cards.SetActive(false);
-            FinalText.SetText("YOU DEFEATED THE DUNGEON!");
-        } else if (playerHealth <= 0) {
+            FinalText.SetText("YOU DEFEATED THE BOSS!");
+            ascendButton.gameObject.SetActive(true);
+        }
+        else if (playerHealth <= 0)
+        {
             cards.SetActive(false);
             FinalText.SetText("GAME OVER...");
+            retryButton.gameObject.SetActive(true);
         }
     }
 
-    void UpdateView() {
-
-        // Update card text
-        for (int i = 0; i < 5; i++) {
+    // Update the view with the current health and cards
+    void UpdateView()
+    {
+        // Update card text (value and element)
+        for (int i = 0; i < 5; i++)
+        {
             TextMeshProUGUI text = playerCardGameObjects[i].transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>();
             text.SetText($"{playerCards[i, 0]} - {GetElement(playerCards[i, 1])}");
         }
@@ -140,14 +164,42 @@ public class CardBattleManager : MonoBehaviour
         // Update health text
         playerHealthText.SetText($"Player Health: {playerHealth}");
         bossHealthText.SetText($"Boss Health: {bossHealth}");
-
-        CheckForGameEnd();
     }
 
-    string GetElement(int val) {
-        if (val == 1) return "Ice";
-        if (val == 2) return "Fire";
-        if (val == 3) return "Water";
-        else return null;
+    // Display the last played cards and their values/elements
+    void DisplayLastPlayedCards(int playerCardValue, int playerCardElement, int bossCardValue, int bossCardElement)
+    {
+        lastPlayedPlayerCard.SetActive(true);
+        lastPlayedBossCard.SetActive(true);
+
+        lastPlayedPlayerCard.transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().SetText(
+            $"{playerCardValue} - {GetElement(playerCardElement)}"
+        );
+
+        lastPlayedBossCard.transform.GetChild(0).GetChild(0).gameObject.GetComponent<TextMeshProUGUI>().SetText(
+            $"{bossCardValue} - {GetElement(bossCardElement)}"
+        );
+    }
+
+    // Helper function to return element name from its code (1: Ice, 2: Fire, 3: Water)
+    string GetElement(int elementCode)
+    {
+        switch (elementCode)
+        {
+            case 1: return "Ice";
+            case 2: return "Fire";
+            case 3: return "Water";
+            default: return "Unknown";
+        }
+    }
+
+    public void RetryGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+    }
+
+    public void AscendLevel()
+    {
+        SceneManager.LoadScene("level2");
     }
 }
