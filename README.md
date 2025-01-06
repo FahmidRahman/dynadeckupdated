@@ -1,11 +1,11 @@
 # README
 
-Dynadeck unity game, currently being prototyped.
+Dynadeck Unity Game, Final Game Project
 
-To play the game, use the "wasd" keys to navigate the initial maze/exploration section, using the mouse to control the third person camera.
-Use the "e" key to interact with the NPC and to forward his dialogue.
-Once you have the key given by the NPC, walk into the door to enter the turn based battle in the dungeon.
-Select the card you'd like to play out of the five available cards.
-Ice beats water, water beats fire, fire beats ice. The difference in the card values is subtracted from the loser's health, if the value isn't negative.
-Keep playing cards until you or the dungeon boss' health falls below zero, where a game ending screen will appear signalling the end of the prototype.
+Player movement is done through "WASD" keys, mouse utilised to control the first person camera and left click on the mouse button to swing the sword. 
+The "e" button is used to interact with items or NPCs and activate buttons.
+Game involves completing complex self made puzzles and navigating through mazes/obstacles to complete each level.
+After a level is completed the player is made to play a card battle as a boss fight and must win to advance to the next level.
+Card battle is elemental based where ice beats water, water beats fire, fire beats ice. The difference in the card values is subtracted from the loser's health, if the value isn't negative.
+
 
